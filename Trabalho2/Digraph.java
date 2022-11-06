@@ -30,9 +30,7 @@ package Trabalho2;
  *  
  ******************************************************************************/
 
-import java.util.HashSet;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 /**
  * The {@code Digraph} class represents a directed graph of vertices named 0
