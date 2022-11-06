@@ -1,4 +1,3 @@
-package src;
 /******************************************************************************
  *  Compilation:  javac Graph.java        
  *  Execution:    java Graph input.txt

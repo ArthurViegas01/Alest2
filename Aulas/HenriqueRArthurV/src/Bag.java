@@ -1,5 +1,3 @@
-package Trabalho2;
-
 /******************************************************************************
  *  Compilation:  javac Bag.java
  *  Execution:    java Bag < input.txt

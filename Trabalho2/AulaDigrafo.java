@@ -1,4 +1,4 @@
-package src;
+package Trabalho2;
 
 public class AulaDigrafo {
     public static void main(String args[]){
@@ -12,6 +12,6 @@ public class AulaDigrafo {
 
         System.out.println(DG.toDot());
 
-        DGBuscaProfundidade dfs1 = new DGBuscaProfundidade(DG, 0);
+        DigrafoBuscaProfundidade dfs1 = new DigrafoBuscaProfundidade(DG, 0);
     }
 }

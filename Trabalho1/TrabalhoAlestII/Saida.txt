@@ -1,0 +1,4 @@
+6 10 15
+5 7 8
+0 5 15
+Numero de Movimentos: 2

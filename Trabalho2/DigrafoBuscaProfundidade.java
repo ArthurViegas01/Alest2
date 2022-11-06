@@ -1,11 +1,11 @@
-package src;
+package Trabalho2;
 
-public class DGBuscaProfundidade{
+public class DigrafoBuscaProfundidade{
     public boolean[] marked;
     public int[] edgeTo;
     public Stack<Integer> reversePostOrder;
 
-    public DGBuscaProfundidade(Digraph G, int s) {
+    public DigrafoBuscaProfundidade(Digraph G, int s) {
         reversePostOrder = new Stack<>();
         marked = new boolean[G.V()];
         edgeTo = new int[G.V()];
