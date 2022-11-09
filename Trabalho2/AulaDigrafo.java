@@ -1,17 +1,33 @@
 package Trabalho2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class AulaDigrafo {
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException{
 
-        Digraph DG = new Digraph(3);
+        String arquivo = "Trabalho2/casoleonardo10.txt";
+        BufferedReader BR = new BufferedReader(new FileReader(arquivo));
 
-        DG.addEdge(0, 1);
-        DG.addEdge(1, 0);
-        DG.addEdge(1, 2);
-        DG.addEdge(2, 0);
+        ArrayList<Sabor> sabor = new ArrayList<>();
 
-        System.out.println(DG.toDot());
+        String linha = "";
+        
+        
 
-        DigrafoBuscaProfundidade dfs1 = new DigrafoBuscaProfundidade(DG, 0);
+        while((linha = BR.readLine()) != null){
+            String[] leitura = linha.split(" -> ");
+
+
+
+            BR.readLine();
+        }
+
+        for(int i = 0; i < sabor.size(); i++){
+            System.out.print(sabor.get(i));
+
+        }
     }
 }

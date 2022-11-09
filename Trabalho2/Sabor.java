@@ -7,7 +7,7 @@ public class Sabor {
 
     public Sabor(String sabor, Integer id) {
         Sabor = sabor;
-        ID=id;
+        ID = id;
     }
 
     public String getSabor() {
