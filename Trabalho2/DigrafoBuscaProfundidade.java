@@ -1,29 +1,27 @@
 package Trabalho2;
+import java.util.ArrayList;
 
-public class DigrafoBuscaProfundidade{
-    public boolean[] marked;
-    public int[] edgeTo;
-    public Stack<Integer> reversePostOrder;
+public class DigrafoBuscaProfundidade {
+    public ArrayList<ArrayList<Integer>> todosCaminhos = new ArrayList<>();
 
-    public DigrafoBuscaProfundidade(Digraph G, int s) {
-        reversePostOrder = new Stack<>();
-        marked = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+    public void caminhar(Digraph g, int s) {
+        ArrayList<Integer> caminho = new ArrayList<>();
+        boolean[] marcado = new boolean[g.V()];
 
-        dfs(G, s);
+        caminho.add(s);
+        CaminharRecursivo(g, s, marcado, caminho);
     }
 
-    //VAI CAIR COMO IMPLEMENTAR
-    private void dfs(Digraph G, int v) {
-        marked[v] = true;
-        for (int w:G.adj(v)) {
-            if(!marked[w]) {
-                edgeTo[w] = v;
-                dfs(G, w);
+    public void CaminharRecursivo(Digraph g, int s, boolean[] marcado, ArrayList<Integer> caminho) {
+        for (int v : g.adj(s)) {
+            if (!marcado[v]) {
+                caminho.add(v);
+                ArrayList<Integer> novaLista = new ArrayList<>(caminho);
+                todosCaminhos.add(novaLista);
+                CaminharRecursivo(g, v, marcado, caminho);
+                caminho.remove((Integer) (v));
             }
         }
-        reversePostOrder.push(v);
     }
-
 
 }
