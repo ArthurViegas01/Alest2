@@ -1,29 +1,42 @@
 package Trabalho2;
+
 import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
-        
+        SaboresLinhas saboresLinhas = ArquivoUtil.carregar("casosteste/casoleonardo60.txt");
         DigrafoBuscaProfundidade digrafoBuscaProfundidade = new DigrafoBuscaProfundidade();
-        FrutasLinhas frutasLinhas = ArquivoUtil.carregar("casosteste/exemplotrabalho.txt");
+        DoisSaboresUtil doisSaboresUtil = new DoisSaboresUtil();
+        TresSaboresUtil tresSaboresUtil = new TresSaboresUtil();
 
-        // Cria com digraph com o tamanho das frutas distintas
-        Digraph digraph = new Digraph(frutasLinhas.frutasDistintas.size());
+
+
+        // Cria com digraph com o tamanho dos sabores distintas
+        long comecoPrograma = System.currentTimeMillis(); 
+        Digraph digraph = new Digraph(saboresLinhas.saboresDistintos.size());
 
         // Cria as conexoes dos vertices
-        for (String linha : frutasLinhas.linhas) {
+        long inicioCriarGrafoVertice = System.currentTimeMillis();
+        for (String linha : saboresLinhas.linhas) {
             String linhaSplit[] = linha.split(" -> ");
-            digraph.addEdge(frutasLinhas.frutasDistintas.indexOf(linhaSplit[0]), frutasLinhas.frutasDistintas.indexOf(linhaSplit[1]));
+            digraph.addEdge(saboresLinhas.saboresDistintos.indexOf(linhaSplit[0]), saboresLinhas.saboresDistintos.indexOf(linhaSplit[1]));
         }
+        long fimCriarGrafoVertice = System.currentTimeMillis();
+
 
         
         // Caminha em todos vertices do digraph para adicionar nos caminhos
+        long inicioCaminhar = System.currentTimeMillis();
         for (int i = 0; i < digraph.V(); i++) {
             digrafoBuscaProfundidade.caminhar(digraph, i);
         }
+        long fimCaminhar = System.currentTimeMillis();
+
+
+
 
         // Contabiliza dois sabores
-        DoisSaboresUtil doisSaboresUtil = new DoisSaboresUtil();
+        long inicioContar2Sabores = System.currentTimeMillis();
         for (int i = 0; i < digrafoBuscaProfundidade.todosCaminhos.size(); i++) {
             ArrayList<Integer> caminho = digrafoBuscaProfundidade.todosCaminhos.get(i);
             int a = caminho.get(0);
@@ -33,9 +46,13 @@ public class App {
                 doisSaboresUtil.adicionar(a, b);
             }
         }
+        long fimContar2Sabores = System.currentTimeMillis();
+
+
+
 
         // Contabiliza tres sabores
-        TresSaboresUtil tresSaboresUtil = new TresSaboresUtil();
+        long inicioContar3Sabores = System.currentTimeMillis();
         for (int i = 0; i < digrafoBuscaProfundidade.todosCaminhos.size(); i++) {
             ArrayList<Integer> caminho = digrafoBuscaProfundidade.todosCaminhos.get(i);
 
@@ -52,11 +69,29 @@ public class App {
                 }
             }
         }
+        long fimContar3Sabores = System.currentTimeMillis();
+        long tempoGeral = System.currentTimeMillis();
 
-        System.out.println("Frutas: " + frutasLinhas.frutasDistintas);
-        System.out.println(digraph.toDot());
-        System.out.println("Todos caminhos: " + digrafoBuscaProfundidade.todosCaminhos.size());
-        System.out.println("Dois sabores: " + doisSaboresUtil.itens.size());
-        System.out.println("Tres sabores: " + tresSaboresUtil.itens.size());
+        float segundosCriarGrafoVertice = (fimCriarGrafoVertice - inicioCriarGrafoVertice) / 1000F;
+        float segundosCaminhar = (fimCaminhar - inicioCaminhar) / 1000F;
+        float segundosContar2 = (fimContar2Sabores - inicioContar2Sabores) / 1000F;
+        float segundosContar3 = (fimContar3Sabores - inicioContar3Sabores) / 1000F;
+        float segundosGeral = (tempoGeral - comecoPrograma) / 1000F;
+
+        System.out.println("=====================================================");
+        System.out.println(digraph.toDot() + "\n");
+        System.out.println("=====================================================");
+        System.out.println("Caso de teste com 60 sabores:");
+        System.out.println("    Tempo para criar Grafo e conectar Vértices:     " + segundosCriarGrafoVertice);
+        System.out.println("    Tempo para criar Caminhar pelo grafo:           " + segundosCaminhar);
+        System.out.println("    Tempo para contar 2 sabores:                    " + segundosContar2);
+        System.out.println("    Tempo para contar 3 sabores:                    " + segundosContar3);
+        System.out.println("    Tempo Geral:                                    " + segundosGeral);
+        System.out.println("=====================================================");
+        System.out.println("Sabores: \n    " + saboresLinhas.saboresDistintos);
+        System.out.println("=====================================================");        
+        System.out.println("Número de caminhos possíveis: " + digrafoBuscaProfundidade.todosCaminhos.size());
+        System.out.println("    Copinhos com Dois sabores: " + doisSaboresUtil.itens.size());
+        System.out.println("    Copinhos com Tres sabores: " + tresSaboresUtil.itens.size());
     }
 }

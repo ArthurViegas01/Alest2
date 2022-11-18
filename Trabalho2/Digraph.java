@@ -28,6 +28,7 @@ package Trabalho2;
  *
  ******************************************************************************/
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -257,6 +258,7 @@ public class Digraph {
         for (int v = 0; v < V; v++) {
             for (int w : adj[v]) {
                 s.append(v + " -> " + w + ";" + NEWLINE);
+                //s.append(saboresLinhas.saboresDistintos.indexOf(v) + " -> " + saboresLinhas.saboresDistintos.indexOf(w) + ";" + NEWLINE);
             }
         }
         s.append("}");

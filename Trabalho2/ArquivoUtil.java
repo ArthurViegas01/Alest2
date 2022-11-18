@@ -4,26 +4,25 @@ import java.util.List;
 
 public class ArquivoUtil {
 
-    public static FrutasLinhas carregar(String path) {
+    public static SaboresLinhas carregar(String path) {
         In in = new In(path);
         String[] linhasArquivo = in.readAllLines();
 
-        List<String> frutasDistintas = new ArrayList<>();
+        List<String> saboresDistintos = new ArrayList<>();
 
         for (String linha : linhasArquivo) {
             String aLinha[] = linha.split(" -> ");
-            String fruta1 = aLinha[0].trim();
-            String fruta2 = aLinha[1].trim();
+            String sabor1 = aLinha[0].trim();
+            String sabor2 = aLinha[1].trim();
 
-            if (!frutasDistintas.contains(fruta1)) {
-                frutasDistintas.add(fruta1);
+            if (!saboresDistintos.contains(sabor1)) {
+                saboresDistintos.add(sabor1);
             }
 
-            if (!frutasDistintas.contains(fruta2)) {
-                frutasDistintas.add(fruta2);
+            if (!saboresDistintos.contains(sabor2)) {
+                saboresDistintos.add(sabor2);
             }
         }
-
-        return new FrutasLinhas(frutasDistintas, linhasArquivo);
+        return new SaboresLinhas(saboresDistintos, linhasArquivo);
     }
 }

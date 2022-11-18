@@ -8,7 +8,7 @@ public class ex1{
 
     public static void main (String args[]){
 
-        ArrayList Inteiros = new ArrayList();
+        ArrayList<Integer> Inteiros = new ArrayList();
 
         Random random = new Random();
     
